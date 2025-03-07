@@ -1,0 +1,49 @@
+name: WEB CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Jest Tests
+        run: npm test
+
+      - name: Build Next.js App
+        run: npm run build
+
+      - name: Deploy Application
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "Deploying application..."
+          # Add your deployment command here (e.g., vercel --prod, netlify deploy, etc.)
