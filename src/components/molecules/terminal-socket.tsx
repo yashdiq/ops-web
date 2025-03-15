@@ -41,7 +41,7 @@ const TerminalSocket: React.FC<ITerminalSocket> = ({ session }) => {
         }
       }, 10);
 
-      terminal.current.writeln("Welcome to the jungle...");
+      terminal.current.writeln("Welcome to the jungle...\n");
     }
 
     const resizeHandler = () => {

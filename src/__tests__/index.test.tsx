@@ -9,8 +9,8 @@ jest.mock("next/navigation", () => ({
 }));
 
 describe("WelcomePage", () => {
-  it("should redirect to /learn", () => {
+  it("should redirect to /learn?page=dashboard", () => {
     WelcomePage();
-    expect(redirect).toHaveBeenCalledWith("/learn");
+    expect(redirect).toHaveBeenCalledWith("/learn?page=dashboard");
   });
 });

@@ -10,7 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 const navigationItems: IHeaderNavigation[] = [
   {
     label: "My Home",
-    href: "/learn",
+    href: "/learn?page=dashboard",
   },
 ];
 
